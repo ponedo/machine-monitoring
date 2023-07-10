@@ -1,0 +1,55 @@
+---
+version: '3.9'
+services:
+  node-exporter:
+    image: 'quay.io/prometheus/node-exporter:latest'
+    # ports:
+    #   - '9100:9100'
+    pid: "host"
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+  prometheus:
+    image: 'prom/prometheus'
+    # ports:
+    #   - '9090:9090'
+    network_mode: "host"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+  pyroscope:
+    image: 'pyroscope/pyroscope:latest'
+    # ports:
+    #   - '4040:4040'
+    network_mode: "host"
+    command:
+      - 'server'
+  pyroscope-ebpf-agent:
+    image: 'pyroscope/pyroscope:latest'
+    user: root
+    privileged: true
+    pid: 'host'
+    network_mode: "host"
+    volumes:
+      - /lib/modules:/lib/modules
+    command:
+      - 'connect'
+      - '--spy-name'
+      - 'ebpfspy'
+      - '--pid'
+      - '-1'
+      - '--server-address'
+      - 'http://localhost:4040'
+  grafana:
+    image: "grafana/grafana-enterprise"
+    # ports:
+    #   - '3000:3000'
+    network_mode: "host"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+volumes:
+  grafana-storage:
+  prometheus-data:
