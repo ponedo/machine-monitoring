@@ -1,1 +1,1 @@
-docker-compose -f docker-compose.yml down
+docker-compose -f /home/cnic/machine-monitoring/docker-compose.yml down
