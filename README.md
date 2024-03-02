@@ -11,6 +11,12 @@ A monitoring software stack configuration. The stack includes:
 - Pyroscope
 
 # Usage
+## Install
+Run the command below:
+```bash
+./install.sh
+```
+This will create and enable a systemctl service named "my_monitor".
 ## Start
 First, reconfigure docker daemon. Modify /etc/docker/daemon.json with following options added:
 ```json
