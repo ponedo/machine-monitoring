@@ -8,6 +8,8 @@ sed -e 's|${WORK_DIR}|'"${WORK_DIR}"'|g' templates/start.sh.tmp > start.sh
 sed -e 's|${WORK_DIR}|'"${WORK_DIR}"'|g' templates/stop.sh.tmp > stop.sh
 
 cp -f my_monitor.service /etc/systemd/system/my_monitor.service
+chmod 775 start.sh
+chmod 775 stop.sh
 systemctl daemon-reload
 systemctl enable my_monitor.service
 
