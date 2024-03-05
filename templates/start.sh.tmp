@@ -1,0 +1,3 @@
+#!/bin/bash
+docker volume prune -f
+docker-compose -f ${WORK_DIR}/docker-compose.yml up -d

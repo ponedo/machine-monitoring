@@ -1,0 +1,2 @@
+#!/bin/bash
+docker-compose -f ${WORK_DIR}/docker-compose.yml down
