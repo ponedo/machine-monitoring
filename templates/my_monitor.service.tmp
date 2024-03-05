@@ -3,7 +3,6 @@ Description=My monitoring service
 
 [Service]
 ExecStart=${WORK_DIR}/start.sh
-ExecStop=${WORK_DIR}/stop.sh
 
 [Install]
 WantedBy=multi-user.target
